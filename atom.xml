@@ -2,11 +2,12 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Sinorcos.github.io/</id>
     <title>SinorCos blog</title>
-    <updated>2020-08-13T12:12:54.475Z</updated>
+    <updated>2020-08-13T12:15:07.807Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Sinorcos.github.io/"/>
     <link rel="self" href="https://Sinorcos.github.io/atom.xml"/>
-    <subtitle>温故而知新</subtitle>
+    <subtitle>Hey！欢迎你关注我。 
+我会和你聊聊关于我的想法， 教程，体验，有意思的东西，好玩的事情，安利你们的东西。 </subtitle>
     <logo>https://Sinorcos.github.io/images/avatar.png</logo>
     <icon>https://Sinorcos.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, SinorCos blog</rights>
