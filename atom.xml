@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://Sinorcos.github.io/</id>
     <title>SinorCos blog</title>
-    <updated>2020-08-13T13:02:36.194Z</updated>
+    <updated>2020-08-13T13:22:35.272Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://Sinorcos.github.io/"/>
     <link rel="self" href="https://Sinorcos.github.io/atom.xml"/>
@@ -11,6 +11,124 @@
     <logo>https://Sinorcos.github.io/images/avatar.png</logo>
     <icon>https://Sinorcos.github.io/favicon.ico</icon>
     <rights>All rights reserved 2020, SinorCos blog</rights>
+    <entry>
+        <title type="html"><![CDATA[使用`Docker`安装`ghost`博客]]></title>
+        <id>https://Sinorcos.github.io/post/shi-yong-dockeran-zhuang-ghostbo-ke/</id>
+        <link href="https://Sinorcos.github.io/post/shi-yong-dockeran-zhuang-ghostbo-ke/">
+        </link>
+        <updated>2020-08-13T13:05:05.000Z</updated>
+        <summary type="html"><![CDATA[<p>👐docker安装博客是一个很不错的选择，一键部署、镜像导出都很不错</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👐docker安装博客是一个很不错的选择，一键部署、镜像导出都很不错</p>
+<!-- more -->
+<h2 id="下载ghost镜像">下载<code>ghost</code>镜像</h2>
+<pre><code class="language-bash">$ docker pull ghost # 如果没有配置加速器，下载`ghost`镜像就会很慢
+$ docker images ls #查看`ghost`镜像
+</code></pre>
+<h2 id="简单使用docker安装ghost博客">简单使用<code>docker</code>安装<code>Ghost</code>博客</h2>
+<p>这将启动侦听默认 Ghost 端口 2368 的 Ghost 实例。</p>
+<pre><code class="language-bash">$ docker run -d --name some-ghost ghost
+</code></pre>
+<p>如果容器是没有ip的情况下，我们是无法访问到<code>docker</code>中的<code>ghost</code>博客。</p>
+<p>所以就需要使用<code>端口映射</code>，将容器的端口映射到主机的端口：</p>
+<pre><code class="language-bash">$ docker run -d --name some-ghost -e url=http://localhost:3001 -p 3001:2368 ghost
+</code></pre>
+<p>打开浏览器输入<code>http://localhost:3001/</code>即可以访问``ghost`博客了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[简洁安装UG12.0教程（全网最简单）  ]]></title>
+        <id>https://Sinorcos.github.io/post/jian-ji-an-zhuang-ug120-jiao-cheng-quan-wang-zui-jian-dan/</id>
+        <link href="https://Sinorcos.github.io/post/jian-ji-an-zhuang-ug120-jiao-cheng-quan-wang-zui-jian-dan/">
+        </link>
+        <updated>2020-08-13T13:03:52.000Z</updated>
+        <summary type="html"><![CDATA[<p>🗣UG NX12.0/64位下载地址：<br>
+pan.baidu.com/s/1_c1TRnnZUYEt7oha7zu6Cg<br>
+密码：dguq<br>
+转载声明：下载地址为公众号<code>软件安装管家</code>提供，网盘如果没有会员可以用<code>亿寻工具</code>加速</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>🗣UG NX12.0/64位下载地址：<br>
+pan.baidu.com/s/1_c1TRnnZUYEt7oha7zu6Cg<br>
+密码：dguq<br>
+转载声明：下载地址为公众号<code>软件安装管家</code>提供，网盘如果没有会员可以用<code>亿寻工具</code>加速</p>
+<!-- more -->
+<h2 id="文件总览">文件总览</h2>
+<p>解压文件夹后，文件大概是这样：</p>
+<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/06/19/NMNE8A.png" alt="文件总览" loading="lazy"></figure>
+<h2 id="一-安装-java90">一、安装 <code>Java9.0</code></h2>
+<p>首先安装<code>UG12.0</code>的第一步就是安装<code>Java9.0</code></p>
+<blockquote>
+<p>似乎说<code>Java</code>是可以保证<code>UG12.0</code>在安装的时候数据不会出现问题。</p>
+</blockquote>
+<p><code>右键</code>以管理员身份运行<code>Java9.0安装程序</code></p>
+<figure data-type="image" tabindex="2"><img src="https://s1.ax1x.com/2020/06/19/NMNnDf.png" alt="java9.0安装程序" loading="lazy"></figure>
+<p>下一步</p>
+<figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/06/19/NMNZvt.png" alt="下一步" loading="lazy"></figure>
+<blockquote>
+<p>这里安装的位置可以自行选择</p>
+</blockquote>
+<figure data-type="image" tabindex="4"><img src="https://s1.ax1x.com/2020/06/19/NMNmKP.png" alt="安装" loading="lazy"></figure>
+<p>下一步</p>
+<figure data-type="image" tabindex="5"><img src="https://s1.ax1x.com/2020/06/19/NMNVgI.png" alt="下一步" loading="lazy"></figure>
+<p>正在安装</p>
+<figure data-type="image" tabindex="6"><img src="https://s1.ax1x.com/2020/06/19/NMNMVS.png" alt="" loading="lazy"></figure>
+<p>安装完成</p>
+<figure data-type="image" tabindex="7"><img src="https://s1.ax1x.com/2020/06/19/NMNQUg.png" alt="" loading="lazy"></figure>
+<h2 id="二-安装nx许可服务器">二、安装<code>NX许可服务器</code></h2>
+<blockquote>
+<p>老版本的ug安装许可方法是通过破解来获得许可，并不是很方便</p>
+<p>这里我们一般用脚本来安装<code>NX许可</code>的服务器，比破解简单的多</p>
+</blockquote>
+<p>打开破解文件，复制里面的<code>NX6-NX12License_Servers</code>文件夹到磁盘的根目录</p>
+<figure data-type="image" tabindex="8"><img src="https://s1.ax1x.com/2020/06/19/NMN3Cj.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="9"><img src="https://s1.ax1x.com/2020/06/19/NMNG2n.png" alt="" loading="lazy"></figure>
+<blockquote>
+<p>也可以是其他磁盘分区的根目录，这里我就用C盘了</p>
+</blockquote>
+<p>然后进去<code>以管理员身份</code>运行<code>安装NX许可服务</code></p>
+<figure data-type="image" tabindex="10"><img src="https://s1.ax1x.com/2020/06/19/NMNJvq.png" alt="" loading="lazy"></figure>
+<p>当出现<code>NX许可服务已经安装完成</code>，就OK了</p>
+<h2 id="三-安装nx程序主体">三、安装NX程序主体</h2>
+<p>回到安装包，找到<code>Launch</code>程序，也是<code>以管理员身份运行</code></p>
+<figure data-type="image" tabindex="11"><img src="https://s1.ax1x.com/2020/06/19/NMNNrV.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="12"><img src="https://s1.ax1x.com/2020/06/19/NMNwaF.png" alt="" loading="lazy"></figure>
+<p>选择<code>Install NX</code>，选择中文（简体），确定</p>
+<figure data-type="image" tabindex="13"><img src="https://s1.ax1x.com/2020/06/19/NMN054.png" alt="" loading="lazy"></figure>
+<p>下一步选择<code>完整安装</code></p>
+<figure data-type="image" tabindex="14"><img src="https://s1.ax1x.com/2020/06/19/NMNrG9.png" alt="" loading="lazy"></figure>
+<blockquote>
+<p>在这里可以自行选择<code>NX主体</code>的安装路径，一般我们只将C盘改成D盘</p>
+</blockquote>
+<p>这一步比较关键，要把<code>服务器的端口</code>改成<code>27800@主机名</code>，主机名会自动识别，只要改<code>27800</code>即可</p>
+<figure data-type="image" tabindex="15"><img src="https://s1.ax1x.com/2020/06/19/NMNcKx.png" alt="" loading="lazy"></figure>
+<p>下一步选择<code>简体中文</code>，再下一步</p>
+<figure data-type="image" tabindex="16"><img src="https://s1.ax1x.com/2020/06/19/NMNgr6.png" alt="" loading="lazy"></figure>
+<blockquote>
+<p>现在就开始安装<code>NX程序主体</code></p>
+</blockquote>
+<p>到这就<code>安装完程序</code>，就剩<code>破解</code>了</p>
+<figure data-type="image" tabindex="17"><img src="https://s1.ax1x.com/2020/06/19/NMNWVO.png" alt="" loading="lazy"></figure>
+<h2 id="四-替换破解文件">四、替换破解文件</h2>
+<p>回到安装包，进到<code>UG12 &gt; 破解文件 &gt; NX 12.0</code></p>
+<p>将里面的文件夹全部复制</p>
+<figure data-type="image" tabindex="18"><img src="https://s1.ax1x.com/2020/06/19/NMN5PH.png" alt="" loading="lazy"></figure>
+<p>来到刚刚选择的安装<code>NX程序主体</code>的路径，粘贴，<code>替换目标中的文件</code></p>
+<figure data-type="image" tabindex="19"><img src="https://s1.ax1x.com/2020/06/19/NMNIGd.png" alt="" loading="lazy"></figure>
+<p>替换完后，<code>UG12</code>就算安装完成了，我们可以在开始菜单找到</p>
+<blockquote>
+<p>默认是不在桌面创建快捷方式的</p>
+</blockquote>
+<figure data-type="image" tabindex="20"><img src="https://s1.ax1x.com/2020/06/19/NMNqqf.png" alt="" loading="lazy"></figure>
+<p>如果出现了这个加载界面说明我们的<code>UG12.0</code>就算<code>安装 + 破解</code>成功了</p>
+<figure data-type="image" tabindex="21"><img src="https://s1.ax1x.com/2020/06/19/NMNHMt.png" alt="" loading="lazy"></figure>
+<figure data-type="image" tabindex="22"><img src="https://s1.ax1x.com/2020/06/19/NMNTxI.png" alt="" loading="lazy"></figure>
+<h3 id="开始快乐画图吧">开始快乐画图吧！</h3>
+<h2 id="领取ug练习图纸200张">领取UG练习图纸200张</h2>
+<blockquote>
+<p>加私人微信：<code>SinOrCosOrTan</code>可领取UG练习图纸200张哦~</p>
+</blockquote>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[微信好友数据分析]]></title>
         <id>https://Sinorcos.github.io/post/wei-xin-hao-you-shu-ju-fen-xi/</id>

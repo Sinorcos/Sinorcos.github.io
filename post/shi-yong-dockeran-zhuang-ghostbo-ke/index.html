@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" >
 
-<title>关于 | SinorCos blog</title>
+<title>使用`Docker`安装`ghost`博客 | SinorCos blog</title>
 <meta name="description" content="Hey！欢迎你关注我。 
 我会和你聊聊关于我的想法， 教程，体验，有意思的东西，好玩的事情，安利你们的东西。 ">
 
@@ -82,25 +82,54 @@
       <div class="sm-12 md-8 col">
         <div class="paper">
           <article class="article">
-            <h1>关于</h1>
+            <h1>使用`Docker`安装`ghost`博客</h1>
             <p class="article-meta">
-              2019-01-25
+              2020-08-13
+              
+                <a href="https://Sinorcos.github.io/tag/ak98RZL3V/" class="badge ">
+                  搭建博客
+                </a>
+              
+                <a href="https://Sinorcos.github.io/tag/SQoNM7KFkd/" class="badge secondary">
+                  docker
+                </a>
               
             </p>
             
+              <img src="https://s1.ax1x.com/2020/06/24/NwGIMV.png" alt="使用`Docker`安装`ghost`博客">
+            
             <div class="post-content">
-              <blockquote>
-<p>欢迎来到我的小站呀，很高兴遇见你！🤝</p>
-</blockquote>
-<h2 id="关于本站">🏠 关于本站</h2>
-<h2 id="博主是谁">👨‍💻 博主是谁</h2>
-<h2 id="兴趣爱好">⛹ 兴趣爱好</h2>
-<h2 id="联系我呀">📬 联系我呀</h2>
+              <p>👐docker安装博客是一个很不错的选择，一键部署、镜像导出都很不错</p>
+<!-- more -->
+<h2 id="下载ghost镜像">下载<code>ghost</code>镜像</h2>
+<pre><code class="language-bash">$ docker pull ghost # 如果没有配置加速器，下载`ghost`镜像就会很慢
+$ docker images ls #查看`ghost`镜像
+</code></pre>
+<h2 id="简单使用docker安装ghost博客">简单使用<code>docker</code>安装<code>Ghost</code>博客</h2>
+<p>这将启动侦听默认 Ghost 端口 2368 的 Ghost 实例。</p>
+<pre><code class="language-bash">$ docker run -d --name some-ghost ghost
+</code></pre>
+<p>如果容器是没有ip的情况下，我们是无法访问到<code>docker</code>中的<code>ghost</code>博客。</p>
+<p>所以就需要使用<code>端口映射</code>，将容器的端口映射到主机的端口：</p>
+<pre><code class="language-bash">$ docker run -d --name some-ghost -e url=http://localhost:3001 -p 3001:2368 ghost
+</code></pre>
+<p>打开浏览器输入<code>http://localhost:3001/</code>即可以访问``ghost`博客了。</p>
 
             </div>
           </article>
         </div>
         <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://Sinorcos.github.io/post/jian-ji-an-zhuang-ug120-jiao-cheng-quan-wang-zui-jian-dan/">
+                <h3 class="post-title">
+                  简洁安装UG12.0教程（全网最简单）  
+                </h3>
+              </a>
+            </div>
           
         </div>
         
@@ -185,15 +214,15 @@
     </div>
     <div class="row">
       
-        <a href="https://Sinorcos.github.io/tag/ak98RZL3V/" class="badge secondary">
+        <a href="https://Sinorcos.github.io/tag/ak98RZL3V/" class="badge success">
           搭建博客
         </a>
       
-        <a href="https://Sinorcos.github.io/tag/SQoNM7KFkd/" class="badge secondary">
+        <a href="https://Sinorcos.github.io/tag/SQoNM7KFkd/" class="badge warning">
           docker
         </a>
       
-        <a href="https://Sinorcos.github.io/tag/7E8IXbRJr/" class="badge warning">
+        <a href="https://Sinorcos.github.io/tag/7E8IXbRJr/" class="badge ">
           安装教程
         </a>
       
@@ -201,15 +230,15 @@
           数据分析
         </a>
       
-        <a href="https://Sinorcos.github.io/tag/1HtWjBI0a6/" class="badge success">
+        <a href="https://Sinorcos.github.io/tag/1HtWjBI0a6/" class="badge ">
           Python
         </a>
       
-        <a href="https://Sinorcos.github.io/tag/nZ0obV8Tc/" class="badge secondary">
+        <a href="https://Sinorcos.github.io/tag/nZ0obV8Tc/" class="badge ">
           ESP8266
         </a>
       
-        <a href="https://Sinorcos.github.io/tag/zTDGSGyhLs/" class="badge ">
+        <a href="https://Sinorcos.github.io/tag/zTDGSGyhLs/" class="badge warning">
           arduino
         </a>
       
