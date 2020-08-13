@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>基于ESP8266的WeMos D1 Webserver | SinorCos blog</title>
+<meta name="description" content="Hey！欢迎你关注我。 
+我会和你聊聊关于我的想法， 教程，体验，有意思的东西，好玩的事情，安利你们的东西。 ">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="shortcut icon" href="https://Sinorcos.github.io//favicon.ico?v=1597323751826">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://unpkg.com/papercss@1.6.1/dist/paper.min.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://Sinorcos.github.io//styles/main.css">
+
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+
+  </head>
+  <body>
+  
+    <nav class="navbar border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="https://Sinorcos.github.io/">SinorCos blog</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1">
+    <button>
+      <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        
+          <li>
+            
+              <a href="/" class="menu">
+                首页
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/archives" class="menu">
+                归档
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/tags" class="menu">
+                标签
+              </a>
+            
+          </li>
+        
+          <li>
+            
+              <a href="/post/about" class="menu">
+                关于
+              </a>
+            
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div id="top" class="row site">
+      <div class="sm-12 md-8 col">
+        <div class="paper">
+          <article class="article">
+            <h1>基于ESP8266的WeMos D1 Webserver</h1>
+            <p class="article-meta">
+              2020-08-13
+              
+                <a href="https://Sinorcos.github.io/tag/nZ0obV8Tc/" class="badge success">
+                  ESP8266
+                </a>
+              
+                <a href="https://Sinorcos.github.io/tag/zTDGSGyhLs/" class="badge success">
+                  arduino
+                </a>
+              
+            </p>
+            
+            <div class="post-content">
+              <h2 id="配网">配网</h2>
+<pre><code class="language-c">#include&lt;ESP8266WiFi.h&gt;
+// 导入ESP8266WIFI模块的库
+
+#define WIFI_SSID &quot;360WiFi-518CFF&quot;
+#define WIFI_PASSWD &quot;********&quot;
+// 设定好wifi的名称与密码
+
+void setup(){
+  Serial.begin(115200);
+  // 串口监视波特率设置
+  WiFi.mode(WIFI_STA);				// 模式设定 WIFI_STA - 客户机 | WIFI_AP - 路由模式
+  WiFi.begin(WIFI_SSID,WIFI_PASSWD);// 将WiFi名称和密码输入
+  
+  WiFi.setAutoConnect(true);		// 自动连接WiFi
+  WiFi.setAutoReconnect(true);		// 自动重连WiFi
+  while(WiFi.status()!=WL_CONNECTED){
+    // WiFi.status() 获取连接状态 WL_CONNECTED 是一个定义好了的常量 - 已连接
+    delay(1000); // 延时
+    Serial.println(&quot;WIFI NOT CONNECT&quot;); // 类似于console.log
+    }
+    Serial.println(&quot;CONNECTED TO AP&quot;);
+  }
+
+  void loop(){
+    //loop code
+  }
+</code></pre>
+<p>结果如下：</p>
+<figure data-type="image" tabindex="1"><img src="https://s1.ax1x.com/2020/07/12/U8o48H.png" alt="串口监视器" loading="lazy"></figure>
+<figure data-type="image" tabindex="2"><img src="https://s1.ax1x.com/2020/07/12/U8o52d.png" alt="路由器管理界面" loading="lazy"></figure>
+<h2 id="wifi扫描网络">WIFI扫描网络</h2>
+<pre><code class="language-c">#include&lt;ESP8266WiFi.h&gt;
+
+void setup(){
+  Serial.begin(115200);
+  WiFi.mode(WIFI_STA);  // 客户端模式
+  WiFi.disconnect();	// 断开连接
+  delay(100);
+  }
+
+  void loop(){
+    int n = WiFi.scanNetworks();	// 扫描网络 | 会返回周围WiFi的数量
+    if(n == 0){
+        Serial.println(&quot;NETWORKS ON FOUND&quot;);	// 扫描不到就提示 0
+      } else{
+          Serial.print(n);
+          Serial.println(&quot; NETWORKS FOUND&quot;);
+          Serial.println(&quot;-----------------------&quot;);
+          for(int i = 0 ; i &lt; n ; i++){
+              Serial.println(WiFi.SSID(i));		// SSID函数包含扫描的WiFi名称，下标传参
+            }
+          Serial.println(&quot;-----------------------&quot;);
+        }
+  }
+</code></pre>
+<p>结果如下：</p>
+<figure data-type="image" tabindex="3"><img src="https://s1.ax1x.com/2020/07/12/U8bfeI.png" alt="" loading="lazy"></figure>
+<h2 id="那么再深入一点">那么再深入一点</h2>
+<pre><code class="language-c">#include &lt;ESP8266WiFi.h&gt;
+#include &lt;ESP8266WebServer.h&gt;
+#include&lt;Servo.h&gt;
+Servo servo;
+
+//网页
+String myhtmlPage =
+    String(&quot;&quot;) +
+    &quot;&lt;html&gt;&quot; +
+    &quot;&lt;head&gt;&quot; +
+    &quot;    &lt;title&gt;ESP8266 Web Server Test&lt;/title&gt;&quot; +
+    &quot;    &lt;script defer=\&quot;defer\&quot;&gt;&quot; +
+    &quot;        function ledSwitch() {&quot; +
+    &quot;            var xmlhttp;&quot; +
+    &quot;            if (window.XMLHttpRequest) {&quot; +
+    &quot;                xmlhttp = new XMLHttpRequest();&quot; +
+    &quot;            } else {&quot; +
+    &quot;                xmlhttp = new ActiveXObject(\&quot;Microsoft.XMLHTTP\&quot;);&quot; +
+    &quot;            }&quot; +
+    &quot;            xmlhttp.onreadystatechange = function () {&quot; +
+    &quot;                if (xmlhttp.readyState == 4 &amp;&amp; xmlhttp.status == 200) {&quot; +
+    &quot;                    document.getElementById(\&quot;txtState\&quot;).innerHTML = xmlhttp.responseText;&quot; +
+    &quot;                }&quot; +
+    &quot;            },&quot; +
+    &quot;            xmlhttp.open(\&quot;GET\&quot;, \&quot;Switch\&quot;, true);&quot; +
+    &quot;            xmlhttp.send(); &quot; +
+    &quot;        }&quot; +
+    &quot;    &lt;/script&gt;&quot; +
+    &quot;&lt;/head&gt;&quot; +
+    &quot;&lt;style&gt;&quot; +
+    &quot;body { &quot; +
+    &quot;    display: flex; &quot; +
+    &quot;    flex-direction: column; &quot; +
+    &quot;    align-items: center; &quot; +
+    &quot;} &quot; +
+    &quot;#txtState{ &quot; +
+    &quot;    margin-bottom: 10px; &quot; +
+    &quot;    font-size: 20px; &quot; +
+    &quot;} &quot; +
+    &quot;.login-button { &quot; +
+    &quot;  width: 270px;  &quot; +
+    &quot; height: 40px;  &quot; +
+    &quot; border-width: 0px;  &quot; +
+    &quot; border-radius: 3px;  &quot; +
+    &quot; background: #1E90FF;  &quot; +
+    &quot; cursor: pointer; &quot; +
+    &quot; outline: none;  &quot; +
+    &quot; font-family: Microsoft YaHei;  &quot; +
+    &quot; color: white; &quot; +
+    &quot; font-size: 17px;  &quot; +
+    &quot;text-align:center;&quot; +
+    &quot;} &quot; +
+    &quot;.login-button:hover { &quot; +
+    &quot; background: #5599FF; &quot; +
+    &quot;} &quot; +
+    &quot;&lt;/style&gt;&quot; +
+    &quot;&lt;body&gt;&quot; +
+    &quot;    &lt;div id=\&quot;txtState\&quot;&gt;Unkwon&lt;/div&gt;&quot; +
+    &quot;    &lt;input class=\&quot;login-button a\“ type=\&quot;button\&quot; value=\&quot;Switch\&quot; onclick=\&quot;ledSwitch()\&quot;&gt;&quot; +
+    &quot;&lt;/body&gt;&quot; +
+    &quot;&lt;/html&gt;&quot;;
+
+bool isLedTurnOpen = false; // 记录LED状态
+
+const char* ssid = &quot;360WiFi-518CFF&quot;;
+const char* password = &quot;haimin4588&quot;;
+
+ESP8266WebServer server(80);
+
+void handleRoot() {
+  server.send(200, &quot;text/html&quot;, myhtmlPage); //！！！注意返回网页需要用&quot;text/html&quot; ！！！
+  Serial.println(&quot;用户访问了主页&quot;);
+}
+
+void handleSwitch() {
+  if (isLedTurnOpen == false) {
+    digitalWrite(2, LOW); // 点亮LED
+    server.send(200, &quot;text/plain&quot;, &quot;Servo has been turn on&quot;);
+    Serial.println(&quot;用户开启了快递箱，舵机释放&quot;);
+    isLedTurnOpen = true;
+  }
+  else {
+    digitalWrite(2, HIGH); // 熄灭LED
+    server.send(200, &quot;text/plain&quot;, &quot;Servo has been turn off&quot;);
+    Serial.println(&quot;用户关闭了快递箱，舵机关闭&quot;);
+    isLedTurnOpen = false;
+  }                      
+}
+
+void handleNotFound() {
+  server.send(404, &quot;text/plain&quot;, &quot;嘤嘤嘤！你访问的页面被外星人劫持了哦&quot;);
+  Serial.println(&quot;用户访问了一个不存在的页面&quot;);
+}
+void setup(void) {
+  servo.attach(D2); //D4
+  servo.write(0);
+  //初始化LED
+  pinMode(LED_BUILTIN, OUTPUT);
+  digitalWrite(LED_BUILTIN, HIGH);
+
+  //初始化串口
+  Serial.begin(115200);
+  Serial.println(&quot;&quot;);
+
+  //初始化网络
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(&quot;.&quot;);
+  }
+  Serial.println(&quot;&quot;);
+  Serial.print(&quot;IP Address: &quot;);
+  Serial.println(WiFi.localIP());
+
+  //初始化WebServer
+  server.on(&quot;/&quot;, handleRoot);
+  server.on(&quot;/Switch&quot;, handleSwitch);
+  server.onNotFound(handleNotFound);
+  server.begin();
+  Serial.println(&quot;HTTP server started&quot;);
+}
+
+void loop(void) {
+  //监听客户请求并处理
+  server.handleClient();
+  if(isLedTurnOpen){
+      digitalWrite(LED_BUILTIN,LOW);
+      servo.write(90);
+      delay(50);
+    } else {
+      digitalWrite(LED_BUILTIN,HIGH);
+      servo.write(0);
+      delay(50);
+      }
+}
+</code></pre>
+<p>其中比较核心的内容就是HTML和监听处理</p>
+
+            </div>
+          </article>
+        </div>
+        <div class="paper" data-aos="fade-in">
+          
+            <div class="next-post">
+              <div class="next">
+                下一篇
+              </div>
+              <a href="https://Sinorcos.github.io/post/hello-gridea/">
+                <h3 class="post-title">
+                  Hello Sinorcos
+                </h3>
+              </a>
+            </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="sm-12 md-4 col sidebar">
+  <div class="paper info-container">
+    <img src="https://Sinorcos.github.io//images/avatar.png?v=1597323751826" class="no-responsive avatar">
+    <div class="text-muted">Hey！欢迎你关注我。 
+我会和你聊聊关于我的想法， 教程，体验，有意思的东西，好玩的事情，安利你们的东西。 </div>
+    <div class="social-container">
+      
+        
+          <a href="https://github.com/quangirl" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://www.zhihu.com/people/quan-quan-13-64-43" target="_blank">
+            <i class="fab fa-zhihu"></i>
+          </a>
+        
+      
+        
+      
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      最新文章
+    </div>
+    <div class="row">
+      <ul>
+        
+          
+            <li>
+              <a href="https://Sinorcos.github.io/post/wei-xin-hao-you-shu-ju-fen-xi/">微信好友数据分析</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://Sinorcos.github.io/post/ji-yu-esp8266-de-wemos-d1-webserver/">基于ESP8266的WeMos D1 Webserver</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://Sinorcos.github.io/post/about/">关于</a>
+            </li>
+          
+        
+          
+            <li>
+              <a href="https://Sinorcos.github.io/post/hello-gridea/">Hello Sinorcos</a>
+            </li>
+          
+        
+      </ul>
+    </div>
+  </div>
+  <div class="paper">
+    <div class="sidebar-title">
+      标签列表
+    </div>
+    <div class="row">
+      
+        <a href="https://Sinorcos.github.io/tag/tpzvuTstg/" class="badge warning">
+          数据分析
+        </a>
+      
+        <a href="https://Sinorcos.github.io/tag/1HtWjBI0a6/" class="badge warning">
+          Python
+        </a>
+      
+        <a href="https://Sinorcos.github.io/tag/nZ0obV8Tc/" class="badge secondary">
+          ESP8266
+        </a>
+      
+        <a href="https://Sinorcos.github.io/tag/zTDGSGyhLs/" class="badge secondary">
+          arduino
+        </a>
+      
+        <a href="https://Sinorcos.github.io/tag/3m8GryKMe/" class="badge secondary">
+          Gridea
+        </a>
+      
+    </div>
+  </div>
+  <div class="paper">
+    Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://Sinorcos.github.io//atom.xml" target="_blank">RSS</a>
+  </div>
+</div>
+
+
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+
+<script type="application/javascript">
+
+AOS.init();
+
+hljs.initHighlightingOnLoad()
+
+</script>
+
+
+
+
+  </body>
+</html>
